@@ -1,0 +1,13 @@
+[project]
+name = "micro-arcade"
+version = "0.1.0"
+description = "A lightweight arcade console and desktop simulator"
+requires-python = ">=3.10"
+dependencies = ["pygame>=2.6,<3"]
+
+[dependency-groups]
+dev = ["pytest>=8,<10"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
