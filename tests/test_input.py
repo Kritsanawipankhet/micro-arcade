@@ -23,6 +23,7 @@ def source():
     (pygame.K_LEFT, "left"), (pygame.K_RIGHT, "right"),
     (pygame.K_SPACE, "jump"), (pygame.K_RETURN, "confirm"),
     (pygame.K_ESCAPE, "back"), (pygame.K_r, "restart"),
+    (pygame.K_w, "p2_up"), (pygame.K_s, "p2_down"),
 ])
 def test_keyboard_mapping_and_release(source, key, action):
     pygame.event.post(pygame.event.Event(pygame.KEYDOWN, key=key))
@@ -45,3 +46,11 @@ def test_multiple_keys_focus_loss_and_quit(source):
     pygame.event.post(pygame.event.Event(pygame.QUIT))
     source.poll()
     assert source.quit_requested
+
+
+def test_two_players_can_hold_and_release_independent_keys(source):
+    for key in (pygame.K_UP, pygame.K_s):
+        pygame.event.post(pygame.event.Event(pygame.KEYDOWN, key=key))
+    assert source.poll() == {"up", "p2_down"}
+    pygame.event.post(pygame.event.Event(pygame.KEYUP, key=pygame.K_UP))
+    assert source.poll() == {"p2_down"}

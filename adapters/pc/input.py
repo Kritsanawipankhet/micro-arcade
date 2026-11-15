@@ -13,6 +13,8 @@ class PCInput(Input):
         pygame.K_RETURN: "confirm",
         pygame.K_ESCAPE: "back",
         pygame.K_r: "restart",
+        pygame.K_w: "p2_up",
+        pygame.K_s: "p2_down",
     }
 
     def __init__(self):
